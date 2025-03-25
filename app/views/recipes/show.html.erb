@@ -1,0 +1,16 @@
+<div class="max-w-4xl mx-auto p-8">
+  <h1 class="text-4xl font-bold mb-4"><%= @recipe.title %></h1>
+
+  <img src="<%= @recipe.image %>" alt="<%= @recipe.title %>" class="w-full rounded-lg mb-6">
+
+  <p class="text-gray-600 mb-4"><%= @recipe.description %></p>
+
+  <h2 class="text-2xl font-semibold mb-2">Ingredients</h2>
+  <p class="bg-gray-100 p-4 rounded"><%= @recipe.ingredients %></p>
+
+  <h2 class="text-2xl font-semibold mt-6 mb-2">Instructions</h2>
+  <p class="bg-gray-100 p-4 rounded"><%= simple_format(@recipe.instructions) %></p>
+
+  <%= link_to "Back to Recipes", recipes_path, 
+      class: "mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition" %>
+</div>

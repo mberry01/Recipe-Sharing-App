@@ -1,14 +1,18 @@
 <h1 class="text-4xl font-bold mb-8">Recommended Recipes</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <% 3.times do %> <!-- Placeholder for recipes -->
+  <% @recipes.each do |recipe| %>  <!-- Loop through actual recipes -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
-      <img src="https://via.placeholder.com/300" alt="Recipe Image" class="w-full h-48 object-cover">
+      <%= link_to recipe_path(recipe), class: "block" do %>
+        <img src="<%= recipe.image %>" alt="<%= recipe.title %>" class="w-full h-48 object-cover">
+      <% end %>
+      
       <div class="p-4">
-        <h2 class="text-xl font-bold">Delicious Recipe</h2>
-        <p class="text-gray-600">By John Doe</p>
+        <h2 class="text-xl font-bold"><%= recipe.title %></h2>
+        <p class="text-gray-600">By <%= recipe.author || "Unknown" %></p>
         <div class="mt-4">
-          <a href="#" class="text-blue-500 hover:text-blue-700">View Recipe →</a>
+          <%= link_to "View Recipe →", recipe_path(recipe), 
+              class: "text-blue-500 hover:text-blue-700" %>
         </div>
       </div>
     </div>

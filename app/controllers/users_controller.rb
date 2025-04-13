@@ -16,10 +16,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = Current.session&.user
+    redirect_to new_session_path, alert: "You must be logged in to view your profile." unless @user
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:username, :email_address, :password, :password_confirmation)
   end
-  
+
 end

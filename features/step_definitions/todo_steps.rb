@@ -1,4 +1,3 @@
-
 Given('I am on the “Sign Up” page') do
   visit new_user_path
 end
@@ -242,21 +241,36 @@ Then("my comment should be visible on the recipe's page") do
   expect(page).to have_css(".comments", text: "Example comment")
 end
 
-Given('there are posted recipes') do
+Given("there are posted recipes") do
+  User.where(email_address: "user1@example.com").destroy_all
+
   @user = User.create!(
-    username: "viewer",
-    email_address: "viewer@example.com",
-    password: "viewerpass",
-    password_confirmation: "viewerpass"
+    username: "user1",
+    email_address: "user1@example.com",
+    password: "user1password",
+    password_confirmation: "user1password"
   )
 
-  @recipe = Recipe.create!(
-    title: "Recipe A",
-    ingredients: "Eggs, Milk",
-    instructions: "Mix ingredients and cook.",
+  visit new_session_path
+  fill_in "email_address", with: "user1@example.com"
+  fill_in "password", with: "user1password"
+  click_on "Log In"
+
+  Recipe.create!(
+    title: "Recipe 1",
+    ingredients: "Ingredient list 1",
+    instructions: "Instructions 1",
+    user: @user
+  )
+
+  Recipe.create!(
+    title: "Recipe 2",
+    ingredients: "Ingredient list 2",
+    instructions: "Instructions 2",
     user: @user
   )
 end
+
 
 When('I click on the recipe') do
   click_on @recipe.title

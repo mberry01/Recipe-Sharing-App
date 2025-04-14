@@ -1,5 +1,5 @@
 Given('I am on the “Sign Up” page') do
-  visit new_user_path
+  visit new_session_path
 end
 
 When('I input my information for username, e-mail, and password') do
@@ -41,7 +41,6 @@ end
 When('I click the “Log In” button') do
   click_on "Log in"
 end
-
 Then('I should be logged into my account') do
   expect(page).to have_content("Logout")
 end
@@ -124,7 +123,7 @@ When('I click the “Add Comment” button') do
   click_on "Add Comment"
 end
 
-Then('my comment should be visible on the recipe page') do
+Then('my comment should be visible on the recipe’s page') do
   expect(page).to have_content("Example comment")
 end
 

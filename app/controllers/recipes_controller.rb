@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
     end
 
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to recipe_path(@recipe)
     else
       flash.now[:alert] = "There was a problem creating the recipe: #{@recipe.errors.full_messages.join(', ')}"
       render :new, status: :unprocessable_entity

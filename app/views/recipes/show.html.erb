@@ -49,7 +49,7 @@
 
   <!-- Comment Form -->
   <h2 class="text-2xl font-semibold mb-4">Leave a Comment</h2>
-  <%= form_with url: comment_recipe_path(@recipe), method: :post, local: true do |form| %>
+  <%= form_with url: recipe_comments_path(@recipe), method: :post, local: true do |form| %>
     <div class="mb-4">
       <%= label_tag :comment, "Comment", class: "block text-gray-700 font-bold mb-2" %>
       <%= text_area_tag :comment, nil, class: "w-full border px-3 py-2 rounded", placeholder: "Type your comment here", required: true %>
@@ -64,7 +64,7 @@
     <h3 class="text-xl font-semibold mt-8 mb-2">Comments</h3>
     <ul class="bg-gray-100 rounded-lg p-4 space-y-2">
       <% @recipe.comments.each do |comment| %>
-        <li class="border-b pb-2"><%= comment.body %></li>
+        <li class="border-b pb-2"><%= comment.content %></li>
       <% end %>
     </ul>
   <% end %>

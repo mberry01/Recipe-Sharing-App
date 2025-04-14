@@ -93,8 +93,18 @@ Then("the recipe using my information should be posted and viewable to other use
 end
 
 Given("I am on a recipe page") do
-  user = User.create!(email_address: "user@example.com", username: "user1", password: "password", password_confirmation: "password")
-  recipe = Recipe.create!(title: "Test Dish", ingredients: "Eggs, Cheese", instructions: "Mix and cook", user: user)
+  user = User.create!(
+    email_address: "user@example.com",
+    username: "user1",
+    password: "password",
+    password_confirmation: "password"
+  )
+  recipe = Recipe.create!(
+    title: "Test Dish",
+    ingredients: "Eggs, Cheese",
+    instructions: "Mix and cook",
+    user: user
+  )
   visit recipe_path(recipe)
 end
 
@@ -270,7 +280,6 @@ Given("there are posted recipes") do
     user: @user
   )
 end
-
 
 When('I click on the recipe') do
   click_on @recipe.title

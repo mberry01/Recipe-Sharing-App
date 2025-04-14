@@ -1,5 +1,5 @@
 Given('I am on the “Sign Up” page') do
-  visit new_user_path
+  visit new_session_path
 end
 
 When('I input my information for username, e-mail, and password') do
@@ -17,7 +17,7 @@ Then('my account should be created using that information') do
 end
 
 Given('I am on the “Log In” page') do
-  visit login_path
+  visit new_session_path
 end
 
 When('I input my username and password') do
@@ -28,15 +28,14 @@ end
 When('I click the “Log In” button') do
   click_on "Log in"
 end
-
 Then('I should be logged into my account') do
   expect(page).to have_content("Logged in as user1")
 end
 
 Given('I have a user, 2 recipes') do
-  @user = User.create(username: "user1", email: "user1@example.com", password: "user1password")
-  @recipe1 = Recipe.create(title: "Recipe 1", description: "First recipe", ingredients: "4, 5, 6", user: @user)
-  @recipe2 = Recipe.create(title: "Recipe 2", description: "Second recipe", ingredients: "1, 2, 3", user: @user)
+  @user1 = User.create!(username: "user1", email: "user1@example.com", password: "user1password")
+  @recipe1 = Recipe.create!(title: "Recipe 1", description: "First recipe", ingredients: "4, 5, 6", user: @user)
+  @recipe2 = Recipe.create!(title: "Recipe 2", description: "Second recipe", ingredients: "1, 2, 3", user: @user)
 end
 
 When('I click on "Create Recipe" button') do
@@ -87,7 +86,7 @@ When('I click the “Add Comment” button') do
   click_on "Add Comment"
 end
 
-Then('my comment should be visible on the recipe page') do
+Then('my comment should be visible on the recipe’s page') do
   expect(page).to have_content("Example comment")
 end
 

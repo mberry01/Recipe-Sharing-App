@@ -1,0 +1,24 @@
+<%= form_with model: recipe, local: true do |form| %>
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :title, class: "w-full border px-3 py-2 rounded" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :ingredients, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_area :ingredients, class: "w-full border px-3 py-2 rounded" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :instructions, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_area :instructions, class: "w-full border px-3 py-2 rounded" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :image, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.file_field :image, class: "w-full border px-3 py-2 rounded" %>
+  </div>
+
+  <%= form.submit((recipe.new_record? ? "Post Recipe" : "Update Recipe"), class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition") %>
+<% end %>
+

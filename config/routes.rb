@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :recipes
 
+post '/recipes/:id/rate', to: 'recipes#rate', as: 'rate_recipe'
 
   # Set the main page as root
   root "main#index"

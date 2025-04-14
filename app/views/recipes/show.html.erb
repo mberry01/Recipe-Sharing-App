@@ -30,4 +30,42 @@
 
   <%= link_to "Back to Recipes", recipes_path,
       class: "mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition" %>
+
+  <hr class="my-8">
+
+  <!-- Rating Form -->
+  <h2 class="text-2xl font-semibold mb-4">Rate This Recipe</h2>
+  <%= form_with url: rate_recipe_path(@recipe), method: :post, local: true do |form| %>
+    <div class="mb-4">
+      <%= label_tag :rating, "Your Rating (1-5)", class: "block text-gray-700 font-bold mb-2" %>
+      <%= number_field_tag :rating, nil, in: 1..5, required: true, class: "w-full border px-3 py-2 rounded" %>
+    </div>
+    <div class="text-center">
+      <%= form.submit "Submit Rating", class: "bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition" %>
+    </div>
+  <% end %>
+
+  <hr class="my-8">
+
+  <!-- Comment Form -->
+  <h2 class="text-2xl font-semibold mb-4">Leave a Comment</h2>
+  <%= form_with url: comment_recipe_path(@recipe), method: :post, local: true do |form| %>
+    <div class="mb-4">
+      <%= label_tag :comment, "Comment", class: "block text-gray-700 font-bold mb-2" %>
+      <%= text_area_tag :comment, nil, class: "w-full border px-3 py-2 rounded", placeholder: "Type your comment here", required: true %>
+    </div>
+    <div class="text-center">
+      <%= form.submit "Add Comment", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition" %>
+    </div>
+  <% end %>
+
+  <!-- Comment List -->
+  <% if @recipe.comments.present? %>
+    <h3 class="text-xl font-semibold mt-8 mb-2">Comments</h3>
+    <ul class="bg-gray-100 rounded-lg p-4 space-y-2">
+      <% @recipe.comments.each do |comment| %>
+        <li class="border-b pb-2"><%= comment.body %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

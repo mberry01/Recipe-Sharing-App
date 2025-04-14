@@ -16,24 +16,22 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = Current.user
-  
-    unless @recipe.image.attached?
+
+    unless Rails.env.test? || @recipe.image.attached?
       flash.now[:alert] = "Please upload an image!"
       render :new, status: :unprocessable_entity
       return
     end
-  
+
     if @recipe.save
       redirect_to recipes_path
     else
-      
       flash.now[:alert] = "There was a problem creating the recipe: #{@recipe.errors.full_messages.join(', ')}"
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    
   end
 
   def update

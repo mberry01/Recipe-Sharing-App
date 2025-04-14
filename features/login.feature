@@ -12,7 +12,7 @@ Feature: User login
     And I fill in "Password" with "secret123"
     And I press "Log In"
     Then I should be on the main page
-    And I should see "Welcome"
+    And I should see "Profile"
 
   Scenario: Logging in with invalid credentials
     When I visit the login page

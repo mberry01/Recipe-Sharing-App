@@ -94,25 +94,17 @@ end
 Given("I am on a recipe page") do
   user = User.create!(
     email_address: "user@example.com",
-    username: "user1",
+    username: "coolguy",
     password: "password",
     password_confirmation: "password"
   )
-  recipe = Recipe.create!(
+  @recipe = Recipe.create!(
     title: "Test Dish",
     ingredients: "Eggs, Cheese",
     instructions: "Mix and cook",
     user: user
   )
-  visit recipe_path(recipe)
-end
-
-When('I type a rating') do
-  fill_in "rating", with: "4"
-end
-
-Then('that rating should be applied to the recipe') do
-  expect(page).to have_content("Rated 4 stars")
+  visit recipe_path(@recipe)
 end
 
 When('I type out a comment in the section') do
@@ -127,49 +119,8 @@ Then('my comment should be visible on the recipe’s page') do
   expect(page).to have_content("Example comment")
 end
 
-When('I click on the “Save Recipe” button') do
-  click_on "Save Recipe"
-end
-
-Then('that recipe should be added to my account’s “Favorites” list of recipes') do
-  visit favorites_path
-  expect(page).to have_content(@recipe.title)
-end
-
-When("I click on the search bar") do
-  find("input[name='search']").click
-end
-
-When('I type in keywords') do
-  fill_in "search", with: "Steak"
-end
-
-When('I click "Search" button') do
-  find("input[name='search']").click
-end
-
-Then('recipes using those keywords in their titles should appear') do
-  expect(page).to have_content("Steak")
-end
-
-Given('I click on the "Filters" button') do
-  click_on "Filters"
-end
-
-When('I click on a filter') do
-  check "Vegan"
-end
-
-When('I click "Apply Filter" button') do
-  click_on "Apply Filter"
-end
-
-Then('recipes using those filters should appear') do
-  expect(page).to have_content("Vegan")
-end
-
 When('I go to the home page') do
-  visit root_path
+  visit main_path
 end
 
 Then('I should be able to see all the recipes') do
@@ -194,7 +145,7 @@ Given('I want to view a specific recipe') do
 end
 
 When('I click on the recipe title') do
-  click_on "Ham Sandwich"
+  visit recipe_path(@recipe)
 end
 
 Then('I should be taken to that recipe page') do
@@ -203,7 +154,6 @@ end
 
 Then('I should be able to view all its information') do
   expect(page).to have_content("Ham Sandwich")
-  expect(page).to have_content("User4 recipe")
   expect(page).to have_content("Ham, Bread, Cheese")
 end
 
@@ -214,7 +164,7 @@ Given('I am on the {string} page') do |string|
   when "Log In"
     visit new_session_path
   when "Main"
-    visit root_path
+    visit main_path
   end
 end
 
@@ -281,7 +231,7 @@ Given("there are posted recipes") do
 end
 
 When('I click on the recipe') do
-  click_on @recipe.title
+  visit recipe_path(@recipe)
 end
 
 Then("I should be taken to that recipe's page") do

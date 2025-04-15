@@ -7,6 +7,7 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
 
@@ -22,15 +23,9 @@
         <nav>
           <a href="<%= profile_path %>" class="text-gray-700 hover:text-blue-600 mx-2">Profile</a>
           <a href="<%= recipes_path %>" class="text-gray-700 hover:text-blue-600 mx-2">Recipes</a>
-          <a href="<%= post_path %>" class="text-gray-700 hover:text-blue-600 mx-2">+ Post</a>
+          <a href="<%= new_recipe_path %>" class="text-gray-700 hover:text-blue-600 mx-2">+ Post</a>
           <%= link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "text-red-500 hover:text-red-700 mx-2" %>
         </nav>
-
-        <!--  Search Bar -->
-        <%= form_with url: recipes_path, method: :get, local: true do %>
-          <input type="text" name="search" placeholder="Search recipes..." class="border px-3 py-1 rounded" />
-          <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" aria-label="Search Bar">Search</button>
-        <% end %>
       </div>
     </div>
   </header>

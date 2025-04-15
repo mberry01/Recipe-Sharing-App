@@ -8,11 +8,11 @@
   <% @recipes.each do |recipe| %>
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
       <%= link_to recipe_path(recipe), class: "block" do %>
-        <%= image_tag recipe.image, alt: recipe.title, class: "w-full rounded-lg mb-6 object-cover max-h-[400px]" %>
+        <%= image_tag recipe.image, alt: recipe.title, class: "w-full rounded-lg mb-6 object-cover max-h-[400px]" if recipe.image.attached? %>
 
         <div class="p-4">
           <h2 class="text-xl font-bold"><%= recipe.title %></h2>
-          <p class="text-gray-600">By <%= recipe.author || "Unknown" %></p>
+          <p class="text-gray-600">By <%= recipe.user.username || "Unknown" %></p>
           <div class="mt-4">
             <span class="text-blue-500 hover:text-blue-700">View Recipe →</span>
           </div>

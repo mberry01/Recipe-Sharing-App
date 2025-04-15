@@ -1,8 +1,8 @@
 class RecipesController < ApplicationController
-  before_action :require_owner, only: [:edit, :update, :destroy]
+  before_action :require_owner, only: [ :edit, :update, :destroy ]
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.where(user: Current.user)
   end
 
   def show
